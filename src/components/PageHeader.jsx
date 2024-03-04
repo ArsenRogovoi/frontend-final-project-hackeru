@@ -1,8 +1,22 @@
-import Container from "@mui/material/Container";
+// import Container from "@mui/material/Container";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import MobileMenu from "./pageHeaderComponents/MobileMenu";
+import PageIndication from "./pageHeaderComponents/PageIndication";
+import DesktopNavBar from "./pageHeaderComponents/DesktopNavBar";
+import Button from "@mui/material/Button";
 
 const PageHeader = () => {
+  const navLinks = ["Home", "About", "Contacts"];
+
   return (
-    <Container sx={{ backgroundColor: "lightblue" }}>Hello world</Container>
+    <AppBar position="static">
+      <Toolbar>
+        <MobileMenu />
+        <PageIndication />
+        <DesktopNavBar pages={navLinks} />
+      </Toolbar>
+    </AppBar>
   );
 };
 

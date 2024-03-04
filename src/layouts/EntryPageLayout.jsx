@@ -1,16 +1,26 @@
 import Grid from "@mui/material/Grid";
+import PageFooter from "../components/pageHeaderComponents/PageFooter";
+import PageHeader from "../components/PageHeader";
 
 const EntryPageLayout = () => {
   return (
-    <Grid container spacing={0}>
-      <Grid item xs={12} textAlign={"center"}>
-        Header
+    <Grid container direction={"column"} sx={{ minHeight: "100vh" }}>
+      <Grid item>
+        <PageHeader />
       </Grid>
-      <Grid item xs={12} textAlign={"center"}>
-        Main
+      <Grid
+        item
+        textAlign={"center"}
+        flexGrow={1}
+        // bgcolor={"lightgray"}
+      >
+        <Grid container>
+          <Grid item>entry page description</Grid>
+          <Grid item>dynamic form</Grid>
+        </Grid>
       </Grid>
-      <Grid item xs={12} textAlign={"center"}>
-        Footer
+      <Grid item>
+        <PageFooter />
       </Grid>
     </Grid>
   );
