@@ -16,7 +16,6 @@ const EntryPageLayout = () => {
       >
         <Grid container>
           <Grid item>entry page description</Grid>
-          <Grid item>dynamic form</Grid>
         </Grid>
       </Grid>
       <Grid item>
