@@ -8,13 +8,19 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import { useRouteContext } from "../../contexts/RouteContext";
+import { Link } from "react-router-dom";
+import ROUTES from "../../models/routeModel";
 
 const MobileMenu = () => {
+  const { currentPath } = useRouteContext();
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+
+  const isSelected = (path) => currentPath === path;
 
   return (
     <>
@@ -35,13 +41,54 @@ const MobileMenu = () => {
       >
         <Box role="navigation" minWidth={250} onClick={toggleDrawer(false)}>
           <List>
-            {["Home", "About", "Contacts"].map((text, ind) => (
-              <ListItem key={ind}>
-                <ListItemButton>
-                  <ListItemText primary={text} color="" />
-                </ListItemButton>
-              </ListItem>
-            ))}
+            <ListItem>
+              <ListItemButton
+                component={Link}
+                to={ROUTES.ROOT}
+                sx={{
+                  backgroundColor: isSelected(ROUTES.ROOT)
+                    ? "rgba(255, 255, 255, 0.2)"
+                    : "transparent",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.08)",
+                  },
+                }}
+              >
+                <ListItemText primary={"Home"} color="" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton
+                component={Link}
+                to={ROUTES.ABOUT}
+                sx={{
+                  backgroundColor: isSelected(ROUTES.ABOUT)
+                    ? "rgba(255, 255, 255, 0.2)"
+                    : "transparent",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.08)",
+                  },
+                }}
+              >
+                <ListItemText primary={"About"} color="" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton
+                component={Link}
+                to={ROUTES.CONTACT}
+                sx={{
+                  backgroundColor: isSelected(ROUTES.CONTACT)
+                    ? "rgba(255, 255, 255, 0.2)"
+                    : "transparent",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.08)",
+                  },
+                }}
+              >
+                <ListItemText primary={"Contact"} color="" />
+              </ListItemButton>
+            </ListItem>
           </List>
         </Box>
       </Drawer>
