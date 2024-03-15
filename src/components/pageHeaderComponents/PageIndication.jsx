@@ -6,11 +6,11 @@ const PageIndication = () => {
   const { currentPath } = useRouteContext();
   let currentRoute;
 
-  for (let route in ROUTES) {
-    if (ROUTES[route] === currentPath) {
-      currentRoute = route;
+  Object.values(ROUTES).forEach((route) => {
+    if (route.path === currentPath) {
+      currentRoute = route.name;
     }
-  }
+  });
 
   return (
     <Typography
@@ -19,7 +19,7 @@ const PageIndication = () => {
       // sx={{ flexGrow: 1 }}
       sx={{ display: { md: "none" } }}
     >
-      {currentRoute === "ROOT" ? "HOME" : currentRoute}
+      {currentRoute}
     </Typography>
   );
 };

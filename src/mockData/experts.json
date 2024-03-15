@@ -1,0 +1,59 @@
+[
+  {
+    "id": "1",
+    "name": "Alexey Ivanov",
+    "specialization": "Financial Analyst",
+    "description": "An expert with more than 10 years of experience in financial analysis and planning.",
+    "availability": [
+      { "date": "2024-03-20", "time": "15:00" },
+      { "date": "2024-03-21", "time": "11:00" }
+    ],
+    "photoUrl": "/assets/images/mockAvatars/avatar-m-1.jpg",
+    "rating": 4.5,
+    "reviews": [
+      {
+        "userId": "100",
+        "content": "An excellent specialist, helped me understand many things.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Maria Sergeeva",
+    "specialization": "Marketing Strategist",
+    "description": "A specialist in strategic marketing and branding with over 8 years of experience.",
+    "availability": [
+      { "date": "2024-03-22", "time": "14:00" },
+      { "date": "2024-03-23", "time": "16:00" }
+    ],
+    "photoUrl": "/assets/images/mockAvatars/avatar-w-1.jpg",
+    "rating": 4.7,
+    "reviews": [
+      {
+        "userId": "101",
+        "content": "Maria helped us build an effective marketing strategy.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Dmitry Vasilyev",
+    "specialization": "IT Consultant",
+    "description": "A professional in the field of information technology and digital transformation.",
+    "availability": [
+      { "date": "2024-03-24", "time": "10:00" },
+      { "date": "2024-03-25", "time": "12:00" }
+    ],
+    "photoUrl": "/assets/images/mockAvatars/avatar-m-2.jpg",
+    "rating": 4.8,
+    "reviews": [
+      {
+        "userId": "102",
+        "content": "Dmitry provided valuable recommendations for improving our IT infrastructure.",
+        "rating": 5
+      }
+    ]
+  }
+]

@@ -6,36 +6,49 @@ import { useRouteContext } from "../../contexts/RouteContext";
 
 const DesktopNavBar = () => {
   const { currentPath } = useRouteContext();
+
+  const determineTabValue = () => {
+    if (currentPath.includes("/experts/")) {
+      return ROUTES.EXPERTS.path;
+    } else {
+      return currentPath;
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
       <Tabs
-        value={currentPath}
+        value={determineTabValue()}
         sx={{
           ".MuiTabs-indicator": {
             backgroundColor: "white",
           },
           ".MuiTab-root": {
             color: "white",
+            "&.Mui-selected": {
+              color: "white",
+              opacity: 1,
+            },
           },
         }}
       >
         <Tab
-          label="Home"
+          label={ROUTES.ROOT.name}
           component={Link}
-          to={ROUTES.ROOT}
-          value={ROUTES.ROOT}
+          to={ROUTES.ROOT.path}
+          value={ROUTES.ROOT.path}
         />
         <Tab
-          label="About"
+          label={ROUTES.ABOUT.name}
           component={Link}
-          to={ROUTES.ABOUT}
-          value={ROUTES.ABOUT}
+          to={ROUTES.ABOUT.path}
+          value={ROUTES.ABOUT.path}
         />
         <Tab
-          label="Contact"
+          label={ROUTES.EXPERTS.name}
           component={Link}
-          to={ROUTES.CONTACT}
-          value={ROUTES.CONTACT}
+          to={ROUTES.EXPERTS.path}
+          value={ROUTES.EXPERTS.path}
         />
       </Tabs>
     </Box>

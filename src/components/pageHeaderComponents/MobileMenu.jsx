@@ -44,9 +44,9 @@ const MobileMenu = () => {
             <ListItem>
               <ListItemButton
                 component={Link}
-                to={ROUTES.ROOT}
+                to={ROUTES.ROOT.path}
                 sx={{
-                  backgroundColor: isSelected(ROUTES.ROOT)
+                  backgroundColor: isSelected(ROUTES.ROOT.path)
                     ? "rgba(255, 255, 255, 0.2)"
                     : "transparent",
                   "&:hover": {
@@ -54,15 +54,15 @@ const MobileMenu = () => {
                   },
                 }}
               >
-                <ListItemText primary={"Home"} color="" />
+                <ListItemText primary={ROUTES.ROOT.name} color="" />
               </ListItemButton>
             </ListItem>
             <ListItem>
               <ListItemButton
                 component={Link}
-                to={ROUTES.ABOUT}
+                to={ROUTES.ABOUT.path}
                 sx={{
-                  backgroundColor: isSelected(ROUTES.ABOUT)
+                  backgroundColor: isSelected(ROUTES.ABOUT.path)
                     ? "rgba(255, 255, 255, 0.2)"
                     : "transparent",
                   "&:hover": {
@@ -70,15 +70,15 @@ const MobileMenu = () => {
                   },
                 }}
               >
-                <ListItemText primary={"About"} color="" />
+                <ListItemText primary={ROUTES.ABOUT.name} color="" />
               </ListItemButton>
             </ListItem>
             <ListItem>
               <ListItemButton
                 component={Link}
-                to={ROUTES.CONTACT}
+                to={ROUTES.EXPERTS.path}
                 sx={{
-                  backgroundColor: isSelected(ROUTES.CONTACT)
+                  backgroundColor: isSelected(ROUTES.EXPERTS.path)
                     ? "rgba(255, 255, 255, 0.2)"
                     : "transparent",
                   "&:hover": {
@@ -86,7 +86,7 @@ const MobileMenu = () => {
                   },
                 }}
               >
-                <ListItemText primary={"Contact"} color="" />
+                <ListItemText primary={ROUTES.EXPERTS.name} color="" />
               </ListItemButton>
             </ListItem>
           </List>

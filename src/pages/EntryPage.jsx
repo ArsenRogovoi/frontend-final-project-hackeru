@@ -1,7 +1,11 @@
-import EntryPageLayout from "../layouts/EntryPageLayout";
+import { Grid } from "@mui/material";
 
 const EntryPage = () => {
-  return <EntryPageLayout />;
+  return (
+    <Grid container>
+      <Grid item>entry page description</Grid>
+    </Grid>
+  );
 };
 
 export default EntryPage;

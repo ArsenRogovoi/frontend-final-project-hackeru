@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import PageFooter from "../components/pageHeaderComponents/PageFooter";
+import PageFooter from "../components/PageFooter";
 import PageHeader from "../components/PageHeader";
 import { Outlet, useLocation } from "react-router-dom";
 import RouteContext from "../contexts/RouteContext";
@@ -13,7 +13,7 @@ const GlobalLayout = () => {
         <Grid item>
           <PageHeader />
         </Grid>
-        <Grid item flexGrow={1}>
+        <Grid item flexGrow={1} bgcolor={"#F8F8F8"}>
           <Outlet />
         </Grid>
         <Grid item>
