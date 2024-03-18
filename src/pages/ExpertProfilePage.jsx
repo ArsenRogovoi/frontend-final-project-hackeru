@@ -25,8 +25,8 @@ const ExpertProfilePage = () => {
       <Grid container mt={1} justifyContent={"space-between"}>
         <Grid item xs={3}>
           <img
-            src={expert.photoUrl}
-            alt={`${expert.name}`}
+            src={process.env.PUBLIC_URL + "/" + expert.profilePicturePath}
+            alt={`${expert.username.firstName}`}
             width={"100%"}
             style={{
               borderRadius: "5px",
@@ -34,14 +34,14 @@ const ExpertProfilePage = () => {
           />
         </Grid>
         <Grid item xs={8}>
-          <Typography variant="h6">{expert.name}</Typography>
+          <Typography variant="h6">{`${expert.username.firstName} ${expert.username.lastName}`}</Typography>
         </Grid>
       </Grid>
       {/* About expert */}
       <Grid container mt={1}>
         <Grid item xs={12}>
           <Typography variant="h5">About the expert</Typography>
-          <Typography mt={1}>{expert.description}</Typography>
+          <Typography mt={1}>{expert.bio}</Typography>
         </Grid>
       </Grid>
       {/* Schedule */}

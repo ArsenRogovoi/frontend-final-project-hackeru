@@ -54,8 +54,12 @@ const ExpertSearchPage = () => {
                       <Grid item xs={3}>
                         {/* meybe mui has some component for images */}
                         <img
-                          src={expert.photoUrl}
-                          alt={`${expert.name}`}
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/" +
+                            expert.profilePicturePath
+                          }
+                          alt={`${expert.username.firstName} ${expert.username.lastName}`}
                           width={"100%"}
                           style={{
                             borderRadius: "5px",
@@ -64,9 +68,9 @@ const ExpertSearchPage = () => {
                       </Grid>
                       <Grid item xs={9}>
                         <Typography variant="h6" ml={3} mb={2}>
-                          {expert.name}
+                          {`${expert.username.firstName} ${expert.username.lastName}`}
                         </Typography>
-                        <Typography ml={3}>{expert.description}</Typography>
+                        <Typography ml={3}>{expert.bio}</Typography>
                       </Grid>
                     </Grid>
                     <Grid container direction={"row"}>

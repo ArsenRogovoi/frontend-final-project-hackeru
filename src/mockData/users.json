@@ -1,5 +1,31 @@
 [
   {
+    "id": "1",
+    "username": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "johndoe@example.com",
+    "profilePicturePath": "assets/images/mockAvatars/avatar-m-1.jpg",
+    "timezone": "UTC",
+    "roles": ["user"],
+    "appointmentIds": ["a1", "a2"],
+    "createdAt": "2024-03-17T12:00:00Z"
+  },
+  {
+    "id": "2",
+    "username": {
+      "firstName": "Jane",
+      "lastName": "Doe"
+    },
+    "email": "janedoe@example.com",
+    "profilePicturePath": "assets/images/mockAvatars/avatar-w-1.jpg",
+    "timezone": "UTC-5",
+    "roles": ["user"],
+    "appointmentIds": ["a3", "a4"],
+    "createdAt": "2024-03-16T11:00:00Z"
+  },
+  {
     "id": "3",
     "username": {
       "firstName": "Alex",
@@ -58,6 +84,45 @@
     },
     "appointmentIds": ["a7", "a8"],
     "createdAt": "2024-03-14T08:00:00Z"
+  },
+  {
+    "id": "5",
+    "username": {
+      "firstName": "Michael",
+      "lastName": "Brown"
+    },
+    "email": "michaelbrown@example.com",
+    "profilePicturePath": "assets/images/mockAvatars/avatar-m-3.jpg",
+    "timezone": "UTC+9",
+    "roles": ["user", "admin"],
+    "appointmentIds": ["a9", "a10"],
+    "createdAt": "2024-03-13T07:00:00Z"
+  },
+  {
+    "id": "6",
+    "username": {
+      "firstName": "Sara",
+      "lastName": "Miller"
+    },
+    "email": "saramiller@example.com",
+    "profilePicturePath": "assets/images/mockAvatars/avatar-w-3.jpg",
+    "timezone": "UTC-8",
+    "roles": ["user"],
+    "appointmentIds": ["a11", "a12"],
+    "createdAt": "2024-03-12T10:00:00Z"
+  },
+  {
+    "id": "7",
+    "username": {
+      "firstName": "Lucas",
+      "lastName": "Garcia"
+    },
+    "email": "lucasgarcia@example.com",
+    "profilePicturePath": "assets/images/mockAvatars/avatar-m-4.jpg",
+    "timezone": "UTC-3",
+    "roles": ["user"],
+    "appointmentIds": ["a13", "a14"],
+    "createdAt": "2024-03-11T09:30:00Z"
   },
   {
     "id": "8",
