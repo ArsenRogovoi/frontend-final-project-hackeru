@@ -20,7 +20,7 @@ const DesktopNavBar = () => {
         if (currentPath.includes("/experts/")) {
           return ROUTES.EXPERTS.path;
         } else {
-          return null;
+          return false;
         }
     }
   };
@@ -68,6 +68,7 @@ const DesktopNavBar = () => {
           to={ROUTES.EXPERTS.path}
           value={ROUTES.EXPERTS.path}
         />
+        <Tab value={"#"} sx={{ display: "none" }} />
       </Tabs>
       <Grid
         item
@@ -81,9 +82,9 @@ const DesktopNavBar = () => {
             variant={"outlined"}
             textColor={"d4c434"}
             buttonColor={"#d4c434"}
-            handleClick={() => handleBtnClick(ROUTES.AUTH.path)}
+            handleClick={() => handleBtnClick(ROUTES.SIGNUP.path)}
           >
-            Sign in
+            Sign up
           </Button>
         </Grid>
         <Grid item ml={1}>
@@ -91,7 +92,7 @@ const DesktopNavBar = () => {
             variant={"text"}
             textColor={"#d4c434"}
             buttonColor={"#d4c434"}
-            handleClick={() => handleBtnClick(ROUTES.AUTH.path)}
+            handleClick={() => handleBtnClick(ROUTES.LOGIN.path)}
           >
             Log in
           </Button>

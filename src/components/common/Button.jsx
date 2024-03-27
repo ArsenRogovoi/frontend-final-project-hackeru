@@ -2,7 +2,14 @@ import { Button as MuiButton } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PropTypes from "prop-types";
 
-const Button = ({ children, variant, textColor, buttonColor, handleClick }) => {
+const Button = ({
+  children,
+  variant,
+  textColor,
+  buttonColor,
+  handleClick,
+  fullWidth,
+}) => {
   const theme = createTheme({
     palette: {
       primary: {
@@ -18,6 +25,7 @@ const Button = ({ children, variant, textColor, buttonColor, handleClick }) => {
         color="primary"
         sx={{ color: textColor ? textColor : "black" }}
         onClick={handleClick}
+        fullWidth={fullWidth}
       >
         {children}
       </MuiButton>

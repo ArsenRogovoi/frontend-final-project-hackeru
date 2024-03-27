@@ -1,21 +1,24 @@
 import { useState } from "react";
-
-import IconButton from "@mui/material/IconButton";
+import {
+  Grid,
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  IconButton,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Drawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
+import { Link, useNavigate } from "react-router-dom";
 import { useRouteContext } from "../../contexts/RouteContext";
-import { Link } from "react-router-dom";
-import { Button, Grid } from "@mui/material";
 import ROUTES from "../../models/routeModel";
+import Button from "../common/Button";
 
 const MobileMenu = () => {
   const { currentPath } = useRouteContext();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -101,12 +104,22 @@ const MobileMenu = () => {
         <Box role="navigation" minWidth={250} onClick={toggleDrawer(false)}>
           <Grid container direction={"column"} mb={1}>
             <Grid item p={1} xs={12}>
-              <Button variant="contained" fullWidth>
+              <Button
+                variant="contained"
+                fullWidth
+                textColor={"black"}
+                handleClick={() => navigate(ROUTES.SIGNUP.path)}
+              >
                 Sign Up
               </Button>
             </Grid>
             <Grid item p={1} xs={12}>
-              <Button variant="outlined" fullWidth>
+              <Button
+                variant="outlined"
+                fullWidth
+                textColor={"primary"}
+                handleClick={() => navigate(ROUTES.LOGIN.path)}
+              >
                 Log in
               </Button>
             </Grid>
