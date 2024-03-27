@@ -1,8 +1,7 @@
 const ROUTES = {
   ROOT: { path: "/", name: "Home" },
   ABOUT: { path: "/about", name: "About" },
-  LOGIN: { path: "/login", name: "Login" },
-  SIGNUP: { path: "/sign-up", name: "Sign up" },
+  AUTH: { path: "/authorization", name: "Log in" },
   FAV_EXPERTS: { path: "/fav-experts", name: "Favorite experts" },
   PROFILE: { path: "/profile", name: "Profile" },
   EXPERTS: { path: "/experts", name: "Find experts" },
