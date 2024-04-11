@@ -1,6 +1,6 @@
 [
   {
-    "id": "3",
+    "_id": "3",
     "username": {
       "firstName": "Alex",
       "lastName": "Smith"
@@ -15,7 +15,7 @@
     "rating": 4.5,
     "reviews": [
       {
-        "userId": "1",
+        "user_id": "1",
         "content": "Very insightful consultation, helped my business grow!",
         "rating": 5
       }
@@ -30,7 +30,7 @@
     "createdAt": "2024-03-15T09:00:00Z"
   },
   {
-    "id": "4",
+    "_id": "4",
     "username": {
       "firstName": "Emily",
       "lastName": "Johnson"
@@ -60,7 +60,7 @@
     "createdAt": "2024-03-14T08:00:00Z"
   },
   {
-    "id": "8",
+    "_id": "8",
     "username": {
       "firstName": "Olivia",
       "lastName": "Martinez"
@@ -90,7 +90,7 @@
     "createdAt": "2024-03-10T07:45:00Z"
   },
   {
-    "id": "9",
+    "_id": "9",
     "username": {
       "firstName": "Ethan",
       "lastName": "Wilson"

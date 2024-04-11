@@ -3,6 +3,7 @@ import { Grid, Tabs, Tab, Container, Paper, Box, Divider } from "@mui/material";
 import ROUTES from "../../models/routeModel";
 import SignupForm from "../forms/SignupForm";
 import LoginForm from "../forms/LoginForm";
+import ExpertSignupForm from "../forms/ExpertSignupForm";
 
 const AuthPage = () => {
   const { type } = useParams();
@@ -13,6 +14,8 @@ const AuthPage = () => {
         return "login";
       case "signup":
         return "signup";
+      case "expert":
+        return "expert";
       default:
         return "login";
     }
@@ -37,11 +40,22 @@ const AuthPage = () => {
                   value={"signup"}
                   label={"Sign up"}
                 ></Tab>
+                <Tab
+                  component={Link}
+                  to={ROUTES.EXPERT_SIGNUP.path}
+                  value={"expert"}
+                  label={"Expert sign up"}
+                ></Tab>
               </Tabs>
             </Grid>
             <Divider />
             <Grid item>
-              {type === "signup" ? <SignupForm /> : <LoginForm />}
+              {type === "signup" && <SignupForm />}
+              {type === "login" && <LoginForm />}
+              {type === "expert" && <ExpertSignupForm />}
+              {type !== "signup" && type !== "login" && type !== "expert" && (
+                <LoginForm />
+              )}
             </Grid>
           </Grid>
         </Paper>
