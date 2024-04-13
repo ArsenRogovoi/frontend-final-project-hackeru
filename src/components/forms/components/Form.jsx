@@ -1,7 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import FormButton from "./FormButton";
-import LoopIcon from "@mui/icons-material/Loop";
 import { func, node, number, object, string } from "prop-types";
 import { memo } from "react";
 

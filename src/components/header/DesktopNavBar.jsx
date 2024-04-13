@@ -3,10 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import ROUTES from "../../models/routeModel";
 import { useRouteContext } from "../../contexts/RouteContext";
 import Button from "../common/Button";
+import { useUser } from "../../contexts/UserContext";
+import Avatar from "./Avatar";
+import { useEffect } from "react";
 
 const DesktopNavBar = () => {
   const { currentPath } = useRouteContext();
   const navigate = useNavigate();
+
+  const { user } = useUser();
 
   const determineTabValue = () => {
     switch (currentPath) {
@@ -70,34 +75,51 @@ const DesktopNavBar = () => {
         />
         <Tab value={"#"} sx={{ display: "none" }} />
       </Tabs>
-      <Grid
-        item
-        display={"flex"}
-        justifyContent={"center"}
-        alignContent={"center"}
-        alignItems={"center"}
-      >
-        <Grid item>
-          <Button
-            variant={"outlined"}
-            textColor={"d4c434"}
-            buttonColor={"#d4c434"}
-            handleClick={() => handleBtnClick(ROUTES.SIGNUP.path)}
-          >
-            Sign up
-          </Button>
+
+      {/* avatar: */}
+      {user && (
+        <Grid
+          item
+          display={"flex"}
+          justifyContent={"center"}
+          alignContent={"center"}
+          alignItems={"center"}
+        >
+          <Avatar user={user} />
         </Grid>
-        <Grid item ml={1}>
-          <Button
-            variant={"text"}
-            textColor={"#d4c434"}
-            buttonColor={"#d4c434"}
-            handleClick={() => handleBtnClick(ROUTES.LOGIN.path)}
-          >
-            Log in
-          </Button>
+      )}
+
+      {/* auth nav buttons: */}
+      {!user && (
+        <Grid
+          item
+          display={"flex"}
+          justifyContent={"center"}
+          alignContent={"center"}
+          alignItems={"center"}
+        >
+          <Grid item>
+            <Button
+              variant={"outlined"}
+              textColor={"d4c434"}
+              buttonColor={"#d4c434"}
+              handleClick={() => handleBtnClick(ROUTES.SIGNUP.path)}
+            >
+              Sign up
+            </Button>
+          </Grid>
+          <Grid item ml={1}>
+            <Button
+              variant={"text"}
+              textColor={"#d4c434"}
+              buttonColor={"#d4c434"}
+              handleClick={() => handleBtnClick(ROUTES.LOGIN.path)}
+            >
+              Log in
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </Grid>
   );
 };

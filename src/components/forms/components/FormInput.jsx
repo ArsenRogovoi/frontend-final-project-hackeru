@@ -1,5 +1,5 @@
 import { Grid, TextField } from "@mui/material";
-import { makeFirstLetterCapital } from "../../utils/algoMethods";
+import { makeFirstLetterCapital } from "../../../utils/algoMethods";
 import { memo } from "react";
 
 const FormInput = ({

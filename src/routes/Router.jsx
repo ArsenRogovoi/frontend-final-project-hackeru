@@ -9,11 +9,13 @@ import GlobalLayout from "../components/layouts/GlobalLayout";
 import ExpertSearchPage from "../components/pages/ExpertSearchPage";
 import ExpertProfilePage from "../components/pages/ExpertProfilePage";
 import AuthPage from "../components/pages/AuthPage";
+import Sandbox from "../sandbox/Sandbox";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={ROUTES.ROOT.path} element={<GlobalLayout />}>
       <Route index element={<EntryPage />} />
+      <Route path={`${ROUTES.ROOT.path}sandbox`} element={<Sandbox />} />
       <Route path={ROUTES.EXPERTS.path} element={<ExpertSearchPage />} />
       <Route
         path={ROUTES.EXPERT_PROFILE.path}
