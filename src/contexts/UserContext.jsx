@@ -27,6 +27,20 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const signupUser = async (formData) => {
+    const { email, password } = formData;
+    try {
+      await axios({
+        method: "post",
+        url: "http://localhost:3500/users",
+        data: formData,
+      });
+      await loginUser({ email, password });
+    } catch (error) {
+      return error;
+    }
+  };
+
   const getUserData = async () => {
     try {
       const token = getToken();
@@ -49,7 +63,9 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, loginUser, getUserData, logoutUser }}>
+    <UserContext.Provider
+      value={{ user, loginUser, getUserData, logoutUser, signupUser }}
+    >
       {children}
     </UserContext.Provider>
   );

@@ -7,7 +7,6 @@ import {
   IconButton,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import mockExperts from "../../mockData/experts.json";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
 import ROUTES from "../../models/routeModel";

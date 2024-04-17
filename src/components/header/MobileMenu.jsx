@@ -118,30 +118,32 @@ const MobileMenu = () => {
             </ListItem>
           </List>
         </Box>
-        <Box role="navigation" minWidth={250} onClick={toggleDrawer(false)}>
-          <Grid container direction={"column"} mb={1}>
-            <Grid item p={1} xs={12}>
-              <Button
-                variant="contained"
-                fullWidth
-                textColor={"black"}
-                handleClick={() => navigate(ROUTES.SIGNUP.path)}
-              >
-                Sign Up
-              </Button>
+        {!user && (
+          <Box role="navigation" minWidth={250} onClick={toggleDrawer(false)}>
+            <Grid container direction={"column"} mb={1}>
+              <Grid item p={1} xs={12}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  textColor={"black"}
+                  handleClick={() => navigate(ROUTES.SIGNUP.path)}
+                >
+                  Sign Up
+                </Button>
+              </Grid>
+              <Grid item p={1} xs={12}>
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  textColor={"primary"}
+                  handleClick={() => navigate(ROUTES.LOGIN.path)}
+                >
+                  Log in
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item p={1} xs={12}>
-              <Button
-                variant="outlined"
-                fullWidth
-                textColor={"primary"}
-                handleClick={() => navigate(ROUTES.LOGIN.path)}
-              >
-                Log in
-              </Button>
-            </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        )}
       </Drawer>
       {/* page indicator */}
       <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

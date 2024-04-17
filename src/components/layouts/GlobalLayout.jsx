@@ -6,18 +6,22 @@ import RouteContext from "../../contexts/RouteContext";
 import { useUser } from "../../contexts/UserContext";
 import { getToken } from "../../utils/localStorageService";
 import { isTokenExpired } from "../../utils/jwtService";
+import { useEffect } from "react";
 
 const GlobalLayout = () => {
   const location = useLocation();
   const { getUserData } = useUser();
 
-  const checkAuth = () => {
-    const token = getToken();
-    const isExpired = isTokenExpired(token);
-    if (!isExpired) getUserData();
-  };
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = getToken();
+      const isExpired = isTokenExpired(token);
+      if (!isExpired) await getUserData();
+    };
 
-  checkAuth();
+    checkAuth();
+  }, []);
+
   return (
     <RouteContext.Provider value={{ currentPath: location.pathname }}>
       <Grid container direction={"column"} sx={{ minHeight: "100vh" }}>

@@ -6,8 +6,11 @@ import initialLoginForm from "../../models/initialLoginForm";
 import { memo, useState } from "react";
 import { Typography } from "@mui/material";
 import { useUser } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../models/routeModel";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(null);
   const { loginUser } = useUser();
@@ -16,6 +19,7 @@ const LoginForm = () => {
     setLoading(true);
     const err = await loginUser(formData);
     setLoading(false);
+    navigate(ROUTES.ROOT.path);
     if (err) {
       setError(err);
     }
