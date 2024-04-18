@@ -1,15 +1,18 @@
 import { useUser } from "../../contexts/UserContext";
+import AdminUserEntryPage from "./entry-page/AdminUserEntryPage";
+import ExpertUserEntryPage from "./expert-pages/ExpertUserEntryPage";
 import GuestEntryPage from "./entry-page/GuestEntryPage";
-import UserEntryPage from "./entry-page/UserEntryPage";
+import RegularUserEntryPage from "./entry-page/RegularUserEntryPage";
 
 const EntryPage = () => {
   const { user } = useUser();
 
   if (user) {
-    return <UserEntryPage />;
-  } else {
-    return <GuestEntryPage />;
+    if (user.isExpert === true) return <ExpertUserEntryPage />;
+    if (user.isExpert === false) return <RegularUserEntryPage />;
+    if (user.isAdmin === true) return <AdminUserEntryPage />;
   }
+  return <GuestEntryPage />;
 };
 
 export default EntryPage;

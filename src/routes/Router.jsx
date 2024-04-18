@@ -10,12 +10,14 @@ import ExpertSearchPage from "../components/pages/ExpertSearchPage";
 import ExpertProfilePage from "../components/pages/ExpertProfilePage";
 import AuthPage from "../components/pages/AuthPage";
 import Sandbox from "../sandbox/Sandbox";
+import ExpertSchedulePage from "../components/pages/expert-pages/ExpertSchedulePage";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={ROUTES.ROOT.path} element={<GlobalLayout />}>
+      {/* All users: */}
       <Route index element={<EntryPage />} />
-      <Route path={`${ROUTES.ROOT.path}sandbox`} element={<Sandbox />} />
+      <Route path="*" element={<>error page</>} />
       <Route path={ROUTES.EXPERTS.path} element={<ExpertSearchPage />} />
       <Route
         path={ROUTES.EXPERT_PROFILE.path}
@@ -23,9 +25,18 @@ const Router = createBrowserRouter(
       />
       <Route path={ROUTES.AUTH.path} element={<AuthPage />} />
       <Route path={ROUTES.ABOUT.path} element={<>about</>} />
+      {/* DELETE!!! 👇 */}
+      <Route path={`${ROUTES.ROOT.path}sandbox`} element={<Sandbox />} />
+      {/* Authorized users: */}
       <Route path={ROUTES.PROFILE.path} element={<>profile page</>} />
+      {/* Expert users: */}
+      <Route
+        path={ROUTES.EXPERT_SCHEDULE.path}
+        element={<ExpertSchedulePage />}
+      />
+      {/* Regular users: */}
       <Route path={ROUTES.FAV_EXPERTS.path} element={<>favorite experts</>} />
-      <Route path="*" element={<>error page</>} />
+      {/* Admin users: */}
     </Route>
   )
 );
