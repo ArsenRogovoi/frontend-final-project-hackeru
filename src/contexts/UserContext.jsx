@@ -11,8 +11,10 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const loginUser = async (formData) => {
+    setLoading(true);
     try {
       const response = await axios({
         method: "post",
@@ -24,10 +26,13 @@ export const UserProvider = ({ children }) => {
       if (err) throw new Error("getUserData error:", err.message);
     } catch (error) {
       return error;
+    } finally {
+      setLoading(false);
     }
   };
 
   const signupUser = async (formData) => {
+    setLoading(true);
     const { email, password } = formData;
     try {
       await axios({
@@ -38,10 +43,13 @@ export const UserProvider = ({ children }) => {
       await loginUser({ email, password });
     } catch (error) {
       return error;
+    } finally {
+      setLoading(false);
     }
   };
 
   const getUserData = async () => {
+    setLoading(true);
     try {
       const token = getToken();
       if (!token) throw new Error("Unauthorized user. Please log in");
@@ -54,6 +62,8 @@ export const UserProvider = ({ children }) => {
       setUser(response.data);
     } catch (error) {
       return error;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,7 +74,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, loginUser, getUserData, logoutUser, signupUser }}
+      value={{ user, loading, loginUser, getUserData, logoutUser, signupUser }}
     >
       {children}
     </UserContext.Provider>
