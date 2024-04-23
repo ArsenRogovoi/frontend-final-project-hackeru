@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import ROUTES from "../../models/routeModel";
@@ -12,24 +11,12 @@ import Form from "./components/Form";
 
 const ExpertSignupForm = () => {
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState(null);
-  const { signupUser } = useUser();
+  const { signupUser, error, loading } = useUser();
 
   const handleSubmit = async (formData) => {
-    setLoading(true);
     const normalized = normalizeExpertSignup(formData);
-    const err = await signupUser(normalized);
-    setLoading(false);
-    if (err) {
-      if (err.response) {
-        setError(err.response.data);
-      } else {
-        setError(err.message);
-      }
-    } else {
-      navigate(ROUTES.ROOT.path);
-    }
+    const newUser = await signupUser(normalized);
+    if (newUser) navigate(ROUTES.LOGIN.path);
   };
 
   const { value, ...rest } = useForm(
@@ -38,7 +25,7 @@ const ExpertSignupForm = () => {
     handleSubmit
   );
 
-  if (!isLoading) {
+  if (!loading) {
     return (
       <Form
         title="Signup page"
@@ -141,9 +128,11 @@ const ExpertSignupForm = () => {
           onChange={rest.handleChange}
           data={value.data}
         />
-        {isError && (
+        {error && (
           <Grid item>
-            <Typography>{isError}</Typography>
+            <Typography color={"red"} fontWeight={600}>
+              {error}
+            </Typography>
           </Grid>
         )}
       </Form>

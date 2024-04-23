@@ -5,18 +5,20 @@ import { Outlet, useLocation } from "react-router-dom";
 import RouteContext from "../../contexts/RouteContext";
 import { useUser } from "../../contexts/UserContext";
 import { getToken } from "../../utils/localStorageService";
-import { isTokenExpired } from "../../utils/jwtService";
 import { useEffect } from "react";
 
 const GlobalLayout = () => {
   const location = useLocation();
-  const { getUserData } = useUser();
+  const { getUserData, logoutUser } = useUser();
 
   useEffect(() => {
     const checkAuth = async () => {
       const token = getToken();
-      const isExpired = isTokenExpired(token);
-      if (!isExpired) await getUserData();
+      if (token) {
+        await getUserData();
+      } else {
+        await logoutUser();
+      }
     };
 
     checkAuth();

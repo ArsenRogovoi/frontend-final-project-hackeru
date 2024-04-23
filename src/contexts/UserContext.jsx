@@ -11,10 +11,44 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
+  const handleError = (error) => {
+    if (error.response) {
+      // Server error
+      setError(error.response.data);
+    } else if (error.request) {
+      // Network error
+      setError("Network Error");
+    } else {
+      // Other error
+      setError(error.message);
+    }
+  };
+
+  // create user in DB
+  const signupUser = async (formData) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:3500/users",
+        data: formData,
+      });
+      return response.data;
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // requests token from server
   const loginUser = async (formData) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await axios({
         method: "post",
@@ -22,34 +56,23 @@ export const UserProvider = ({ children }) => {
         data: formData,
       });
       setToken(response.data);
-      const err = await getUserData();
-      if (err) throw new Error("getUserData error:", err.message);
+      return response.data;
     } catch (error) {
-      return error;
+      handleError(error);
     } finally {
       setLoading(false);
     }
   };
 
-  const signupUser = async (formData) => {
-    setLoading(true);
-    const { email, password } = formData;
-    try {
-      await axios({
-        method: "post",
-        url: "http://localhost:3500/users",
-        data: formData,
-      });
-      await loginUser({ email, password });
-    } catch (error) {
-      return error;
-    } finally {
-      setLoading(false);
-    }
+  const logoutUser = () => {
+    removeToken();
+    setUser(null);
   };
 
+  // requests user data
   const getUserData = async () => {
     setLoading(true);
+    setError(null);
     try {
       const token = getToken();
       if (!token) throw new Error("Unauthorized user. Please log in");
@@ -61,20 +84,23 @@ export const UserProvider = ({ children }) => {
       });
       setUser(response.data);
     } catch (error) {
-      return error;
+      handleError(error);
     } finally {
       setLoading(false);
     }
   };
 
-  const logoutUser = () => {
-    removeToken();
-    setUser(null);
-  };
-
   return (
     <UserContext.Provider
-      value={{ user, loading, loginUser, getUserData, logoutUser, signupUser }}
+      value={{
+        user,
+        loading,
+        error,
+        loginUser,
+        logoutUser,
+        signupUser,
+        getUserData,
+      }}
     >
       {children}
     </UserContext.Provider>

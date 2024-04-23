@@ -3,26 +3,19 @@ import FormInput from "./components/FormInput";
 import loginSchema from "../../validation/joi/loginSchema";
 import useForm from "../../hooks/useForm";
 import initialLoginForm from "../../models/initialLoginForm";
-import { memo, useState } from "react";
-import { Typography } from "@mui/material";
+import { memo } from "react";
+import { Grid, Typography } from "@mui/material";
 import { useUser } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../models/routeModel";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState(null);
-  const { loginUser } = useUser();
+  const { loginUser, error, loading } = useUser();
 
   const handleSubmit = async (formData) => {
-    setLoading(true);
-    const err = await loginUser(formData);
-    setLoading(false);
-    navigate(ROUTES.ROOT.path);
-    if (err) {
-      setError(err);
-    }
+    const token = await loginUser(formData);
+    if (token) navigate(ROUTES.ROOT.path);
   };
 
   const { value, ...rest } = useForm(
@@ -31,7 +24,7 @@ const LoginForm = () => {
     handleSubmit
   );
 
-  if (!isError && !isLoading)
+  if (!loading)
     return (
       <Form
         title="Login page"
@@ -55,12 +48,17 @@ const LoginForm = () => {
           onChange={rest.handleChange}
           data={value.data}
         />
+        {error && (
+          <Grid item>
+            <Typography color={"red"} fontWeight={600}>
+              {error}
+            </Typography>
+          </Grid>
+        )}
       </Form>
     );
 
-  if (isError) return <Typography>{isError.message}</Typography>;
-
-  if (isLoading) return <Typography>Loading...</Typography>;
+  if (loading) return <Typography>Loading...</Typography>;
 };
 
 export default memo(LoginForm);
