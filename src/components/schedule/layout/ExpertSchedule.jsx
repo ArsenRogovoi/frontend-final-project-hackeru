@@ -1,34 +1,29 @@
 import {
-  Box,
   Container,
   Divider,
   Grid,
-  IconButton,
-  Paper,
-  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { DateCalendar } from "@mui/x-date-pickers";
-import AddIcon from "@mui/icons-material/Add";
-import { useEffect, useState } from "react";
-import useAppointmentApi from "../../../hooks/useAppointmentApi";
+
+import { useState } from "react";
 import dayjs from "dayjs";
-import DaySlots from "../components/DaySlots";
 import DeleteConfirmationModal from "../forms/DeleteConfirmationModal";
 import CreateAppointmentModal from "../forms/CreateAppointmentModal";
+import WeekSlots from "../components/WeekSlots";
 
-const ExpertSchedule = ({ user, date, handleDateChange, weekDates }) => {
-  // -->
-  const {
-    loading,
-    error,
-    appointments,
-    createAppointment,
-    getMonthAppointments,
-    deleteAppointment,
-  } = useAppointmentApi();
-
+const ExpertSchedule = ({
+  user,
+  date,
+  handleDateChange,
+  weekDates,
+  handleCreateAppointment,
+  appointments,
+  loading,
+  handleDeleteAppointment,
+}) => {
+  // responsiveness:
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -37,14 +32,10 @@ const ExpertSchedule = ({ user, date, handleDateChange, weekDates }) => {
   const [modalDay, setModalDay] = useState(null);
   const [modalStartTime, setModalStartTime] = useState(null);
   const [modalEndTime, setModalEndTime] = useState(null);
+
   // deleting appointment confirmation modal states:
   const [delModalIsOpen, setDelModalIsOpen] = useState(false);
   const [delModalApp, setDelModalApp] = useState(null);
-
-  // -->
-  useEffect(() => {
-    getMonthAppointments(user._id, date.month(), date.year());
-  }, []);
 
   const handleModalOpen = (day) => {
     setModalDay(day);
@@ -61,28 +52,17 @@ const ExpertSchedule = ({ user, date, handleDateChange, weekDates }) => {
   const handleChangeModalEndTime = (newValue) => {
     setModalEndTime(newValue);
   };
-
-  // -->
-  const handleCreateAppointment = () => {
-    const appointment = {
-      startTime: modalStartTime,
-      endTime: modalEndTime,
-    };
-    handleModalClose();
-    createAppointment(appointment);
-  };
-  // -->
-  const handleDeleteAppointment = (_id) => {
-    deleteAppointment(_id);
-  };
-
   const handleDelModalOpen = (appointment) => {
     setDelModalApp(appointment);
     setDelModalIsOpen(true);
   };
-
   const handleDelModalClose = () => {
     setDelModalIsOpen(false);
+  };
+
+  const handleModalCreateBtnClick = () => {
+    handleCreateAppointment(modalStartTime, modalEndTime);
+    handleModalClose();
   };
 
   const modalStyle = {
@@ -106,7 +86,12 @@ const ExpertSchedule = ({ user, date, handleDateChange, weekDates }) => {
       >
         {/* calendar */}
         <Grid item>
-          <DateCalendar value={date} onChange={handleDateChange} disablePast />
+          <DateCalendar
+            value={date}
+            onChange={handleDateChange}
+            disablePast
+            loading={loading}
+          />
         </Grid>
         <Grid item>
           <Divider />
@@ -116,44 +101,16 @@ const ExpertSchedule = ({ user, date, handleDateChange, weekDates }) => {
           <Container>
             {loading && <>loading...</>}
             {!loading && (
-              <Grid container>
-                {weekDates.map((day) => {
-                  return (
-                    <Grid item xs={12} m={1} key={day.unix()}>
-                      {/* day header */}
-                      <Paper>
-                        <Container>
-                          <Box
-                            display={"flex"}
-                            flexDirection={"row"}
-                            alignItems={"center"}
-                            justifyContent={"space-between"}
-                          >
-                            <Typography>{day.format("D MMMM")}</Typography>
-                            <IconButton
-                              color="primary"
-                              onClick={() => handleModalOpen(day)}
-                            >
-                              <AddIcon />
-                            </IconButton>
-                          </Box>
-                        </Container>
-                      </Paper>
-                      {/* day appointments: */}
-                      <DaySlots
-                        day={day}
-                        appointments={appointments}
-                        handleDelModalOpen={handleDelModalOpen}
-                      />
-                    </Grid>
-                  );
-                })}
-              </Grid>
+              <WeekSlots
+                weekDates={weekDates}
+                handleModalOpen={handleModalOpen}
+                appointments={appointments}
+                handleDelModalOpen={handleDelModalOpen}
+              />
             )}
           </Container>
         </Grid>
       </Grid>
-      {/* Modal for creating appointments: */}
       <CreateAppointmentModal
         modalIsOpen={modalIsOpen}
         modalStyle={modalStyle}
@@ -163,9 +120,8 @@ const ExpertSchedule = ({ user, date, handleDateChange, weekDates }) => {
         handleChangeModalStartTime={handleChangeModalStartTime}
         handleChangeModalEndTime={handleChangeModalEndTime}
         handleModalClose={handleModalClose}
-        handleConfirm={handleCreateAppointment}
+        handleConfirm={handleModalCreateBtnClick}
       />
-      {/* deleting appointment confirmation modal: */}
       <DeleteConfirmationModal
         modalStyle={modalStyle}
         delModalApp={delModalApp}

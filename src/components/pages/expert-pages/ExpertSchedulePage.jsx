@@ -6,11 +6,20 @@ import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
 import ROUTES from "../../../models/routeModel";
 import ExpertSchedule from "../../schedule/layout/ExpertSchedule";
+import useAppointmentApi from "../../../hooks/useAppointmentApi";
 dayjs.extend(isoWeek);
 
 const ExpertSchedulePage = () => {
   const { user } = useUser();
   const navigate = useNavigate();
+  const {
+    loading,
+    error,
+    appointments,
+    createAppointment,
+    getMonthAppointments,
+    deleteAppointment,
+  } = useAppointmentApi();
 
   useEffect(() => {
     if (!user) {
@@ -39,8 +48,21 @@ const ExpertSchedulePage = () => {
     setWeekDates(days);
   };
 
+  const handleCreateAppointment = (modalStartTime, modalEndTime) => {
+    const appointment = {
+      startTime: modalStartTime,
+      endTime: modalEndTime,
+    };
+    createAppointment(appointment);
+  };
+
+  const handleDeleteAppointment = (_id) => {
+    deleteAppointment(_id);
+  };
+
   useEffect(() => {
     updateWeekDates(date);
+    getMonthAppointments(user._id, date.month(), date.year());
   }, []);
 
   if (user)
@@ -53,8 +75,12 @@ const ExpertSchedulePage = () => {
         <ExpertSchedule
           user={user}
           date={date}
-          handleDateChange={handleDateChange}
+          appointments={appointments}
           weekDates={weekDates}
+          loading={loading}
+          handleCreateAppointment={handleCreateAppointment}
+          handleDeleteAppointment={handleDeleteAppointment}
+          handleDateChange={handleDateChange}
         />
       </Box>
     );
