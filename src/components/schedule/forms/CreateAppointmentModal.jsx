@@ -1,24 +1,30 @@
-import { Box, Button, Divider, Grid, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Modal, Typography } from "@mui/material";
 import { TimePicker } from "@mui/x-date-pickers";
-import { forwardRef, useState } from "react";
 
-const MobileModalForm = forwardRef(
-  (
-    {
-      modalIsOpen,
-      modalStyle,
-      modalDay,
-      modalStartTime,
-      modalEndTime,
-      handleChangeModalStartTime,
-      handleChangeModalEndTime,
-      handleModalClose,
-      handleConfirm,
-    },
-    ref
-  ) => {
-    return (
-      <Box sx={modalStyle} ref={ref}>
+const CreateAppointmentModal = ({
+  modalIsOpen,
+  modalStyle,
+  modalDay,
+  modalStartTime,
+  modalEndTime,
+  handleChangeModalStartTime,
+  handleChangeModalEndTime,
+  handleModalClose,
+  handleConfirm,
+}) => {
+  return (
+    <Modal
+      open={modalIsOpen}
+      onClose={handleModalClose}
+      slotProps={{
+        backdrop: {
+          style: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      }}
+    >
+      <Box sx={modalStyle}>
         {modalDay && (
           <Grid container>
             <Grid item>
@@ -35,11 +41,6 @@ const MobileModalForm = forwardRef(
                 ampm={false}
                 value={modalStartTime}
                 onChange={handleChangeModalStartTime}
-                inputRef={(inputRef) => {
-                  if (inputRef && modalIsOpen) {
-                    inputRef.focus();
-                  }
-                }}
               />
             </Grid>
             <Grid item xs={12} mt={1}>
@@ -69,8 +70,8 @@ const MobileModalForm = forwardRef(
           </Grid>
         )}
       </Box>
-    );
-  }
-);
+    </Modal>
+  );
+};
 
-export default MobileModalForm;
+export default CreateAppointmentModal;

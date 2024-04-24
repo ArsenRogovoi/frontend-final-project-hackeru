@@ -14,8 +14,8 @@ const EntryPage = () => {
 
   if (user) {
     if (user.isExpert === true) return <ExpertUserEntryPage />;
-    if (user.isExpert === false) return <RegularUserEntryPage />;
     if (user.isAdmin === true) return <AdminUserEntryPage />;
+    if (user.isExpert === false) return <RegularUserEntryPage />;
   }
   return <GuestEntryPage />;
 };

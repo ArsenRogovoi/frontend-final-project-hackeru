@@ -4,24 +4,23 @@ import PageHeader from "../header/PageHeader";
 import { Outlet, useLocation } from "react-router-dom";
 import RouteContext from "../../contexts/RouteContext";
 import { useUser } from "../../contexts/UserContext";
-import { getToken } from "../../utils/localStorageService";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const GlobalLayout = () => {
   const location = useLocation();
-  const { getUserData, logoutUser } = useUser();
+  const { getUserData } = useUser();
+  const [readyToRender, setReadyToRender] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const token = getToken();
-      if (token) {
+    const fetchUser = async () => {
+      try {
         await getUserData();
-      } else {
-        await logoutUser();
+      } catch {
+      } finally {
+        setReadyToRender(true);
       }
     };
-
-    checkAuth();
+    fetchUser();
   }, []);
 
   return (
@@ -31,7 +30,7 @@ const GlobalLayout = () => {
           <PageHeader />
         </Grid>
         <Grid item flexGrow={1} bgcolor={"#F8F8F8"}>
-          <Outlet />
+          {readyToRender ? <Outlet /> : <>Loading...</>}
         </Grid>
         <Grid item>
           <PageFooter />

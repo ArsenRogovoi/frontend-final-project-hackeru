@@ -1,21 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../contexts/UserContext";
-import { Container, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
 import ROUTES from "../../../models/routeModel";
-import MobileSchedule from "../../schedule/layout/MobileSchedule";
-import DesktopSchedule from "../../schedule/layout/DesktopSchedule";
+import ExpertSchedule from "../../schedule/layout/ExpertSchedule";
 dayjs.extend(isoWeek);
 
 const ExpertSchedulePage = () => {
-  const { user, loading } = useUser();
+  const { user } = useUser();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate(ROUTES.LOGIN.path);
+    }
+  }, []);
+
   const [date, setDate] = useState(dayjs());
   const [weekDates, setWeekDates] = useState([]);
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const handleDateChange = (newDate) => {
     setDate(newDate);
@@ -39,32 +43,20 @@ const ExpertSchedulePage = () => {
     updateWeekDates(date);
   }, []);
 
-  useEffect(() => {
-    if (!loading && (!user || user.isExpert !== true)) {
-      navigate(ROUTES.LOGIN.path);
-      console.log("redirected");
-    }
-  }, [user, loading, navigate]);
+  if (user)
+    return (
+      <Box>
+        <Typography variant="h4" textAlign={"center"} mt={1}>
+          Schedule
+        </Typography>
 
-  if (user) {
-    if (user.isExpert === true)
-      return (
-        <Container>
-          <Typography variant="h4" textAlign={"center"} mt={1}>
-            Schedule
-          </Typography>
-          {isDesktop ? (
-            <DesktopSchedule />
-          ) : (
-            <MobileSchedule
-              user={user}
-              date={date}
-              handleDateChange={handleDateChange}
-              weekDates={weekDates}
-            />
-          )}
-        </Container>
-      );
-  }
+        <ExpertSchedule
+          user={user}
+          date={date}
+          handleDateChange={handleDateChange}
+          weekDates={weekDates}
+        />
+      </Box>
+    );
 };
 export default ExpertSchedulePage;

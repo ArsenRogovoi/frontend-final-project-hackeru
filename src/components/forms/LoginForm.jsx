@@ -11,7 +11,7 @@ import ROUTES from "../../models/routeModel";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { loginUser, error, loading } = useUser();
+  const { loginUser, loginLoading, loginError } = useUser();
 
   const handleSubmit = async (formData) => {
     const token = await loginUser(formData);
@@ -24,7 +24,7 @@ const LoginForm = () => {
     handleSubmit
   );
 
-  if (!loading)
+  if (!loginLoading)
     return (
       <Form
         title="Login page"
@@ -48,17 +48,17 @@ const LoginForm = () => {
           onChange={rest.handleChange}
           data={value.data}
         />
-        {error && (
+        {loginError && (
           <Grid item>
             <Typography color={"red"} fontWeight={600}>
-              {error}
+              {loginError}
             </Typography>
           </Grid>
         )}
       </Form>
     );
 
-  if (loading) return <Typography>Loading...</Typography>;
+  if (loginLoading) return <Typography>Loading...</Typography>;
 };
 
 export default memo(LoginForm);
