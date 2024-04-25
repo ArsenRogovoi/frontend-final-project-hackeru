@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import Button from "../../../common/Button";
 
@@ -18,11 +18,13 @@ const WeekController = ({
     >
       <Grid
         item
-        xs={5}
-        m={1}
+        p={1}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
+        xs={12}
+        sm={4}
+        md={3}
       >
         <DatePicker
           value={dataRangeStart}
@@ -34,18 +36,20 @@ const WeekController = ({
           disablePast
         />
       </Grid>
-      <Grid item>
-        <Typography color={"#fff"} xs={2} variant="h4">
+      <Grid item xs={12} sm={1}>
+        <Typography color={"#fff"} textAlign={"center"} fontWeight={600}>
           -
         </Typography>
       </Grid>
       <Grid
         item
-        xs={5}
-        m={1}
+        p={1}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
+        xs={12}
+        sm={4}
+        md={3}
       >
         <DatePicker
           value={dataRangeEnd}
@@ -60,8 +64,14 @@ const WeekController = ({
           disablePast
         />
       </Grid>
-      <Grid item xs={12}>
-        <Box mx={2} mb={1}>
+      <Grid item xs={12} sm={3} md={2} px={1}>
+        <Box
+          sx={{
+            minWidth: { xs: "150px", sm: "0" },
+            maxWidth: "246.4px",
+            margin: { xs: "0 auto 8px auto", sm: "0" },
+          }}
+        >
           <Button
             variant={"contained"}
             fullWidth

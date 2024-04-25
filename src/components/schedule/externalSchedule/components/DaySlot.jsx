@@ -3,9 +3,9 @@ import dayjs from "dayjs";
 
 const DaySlot = ({ startTime, endTime }) => {
   return (
-    <Grid item xs={5} p={1}>
-      <Paper sx={{ m: 1 }}>
-        <Box m={1}>
+    <Grid item xs={12} sm={4} md={2} sx={{ my: { xs: 1 } }}>
+      <Paper sx={{ p: { xs: 1 }, m: { sm: 1 } }}>
+        <Box>
           <Typography fontSize={"20px"} textAlign={"center"}>
             {dayjs(startTime).format("DD")} {dayjs(startTime).format("MMMM")}
           </Typography>
