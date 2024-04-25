@@ -111,7 +111,7 @@ const ExpertSearchPage = () => {
                               <Button
                                 variant="outlined"
                                 component={Link}
-                                to={`${ROUTES.EXPERTS.path}/${expert._id}`}
+                                to={`${ROUTES.EXPERTS_SEARCH.path}/${expert._id}`}
                               >
                                 Profile
                               </Button>

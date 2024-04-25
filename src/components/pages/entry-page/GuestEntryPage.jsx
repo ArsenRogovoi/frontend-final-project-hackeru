@@ -38,7 +38,7 @@ const GuestEntryPage = () => {
             <Button
               variant="contained"
               onClick={() => {
-                navigate(ROUTES.EXPERTS.path);
+                navigate(ROUTES.EXPERTS_SEARCH.path);
               }}
             >
               Search for experts

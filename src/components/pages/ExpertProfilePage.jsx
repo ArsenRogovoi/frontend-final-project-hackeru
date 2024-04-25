@@ -1,45 +1,48 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import experts from "../../mockData/experts.json";
 import { Container, Grid, Typography } from "@mui/material";
-import Schedule from "../schedule/Schedule";
-import axios from "axios";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import ProfileExpertSchedule from "../schedule/externalSchedule/ProfileExpertSchedule";
+import useUsersApi from "../../hooks/useUsersApi";
+import dayjs from "dayjs";
+import useAppointmentApi from "../../hooks/useAppointmentApi";
 
 const ExpertProfilePage = () => {
   let { expertId } = useParams();
-  const [expert, setExpert] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState(null);
+  const {
+    loading: expertDataLoading,
+    error: expertDataError,
+    expert,
+    getExpertData,
+  } = useUsersApi();
+  const {
+    loading: apptsDataLoading,
+    error: apptsDataError,
+    appointments,
+    getFreeApptsByDateRange,
+  } = useAppointmentApi();
+  const [dataRangeStart, setDataRangeStart] = useState(dayjs());
+  const [dataRangeEnd, setDataRangeEnd] = useState(dayjs().add(1, "week"));
 
   useEffect(() => {
-    const fetchExpert = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `http://localhost:3500/users/experts/${expertId}`
-        );
-        setExpert(response.data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-      }
-    };
-
-    fetchExpert();
-    // setTimeout(() => {
-    //   // change array method!
-    //   experts.map((expert) => {
-    //     if (expert.id === expertId) {
-    //       setExpert(expert);
-    //     }
-    //   });
-    // }, 1000);
+    getExpertData(expertId);
+    getFreeApptsByDateRange(expertId, dataRangeStart, dataRangeEnd);
   }, []);
 
-  if (isError) return <Typography>{isError.message}</Typography>;
+  const handleChangeRangeStart = (data) => {
+    setDataRangeStart(data);
+  };
+  const handleChangeRangeEnd = (data) => {
+    setDataRangeEnd(data);
+  };
 
-  if (isLoading) return <Typography>Loading...</Typography>;
+  const handleSearch = () => {
+    getFreeApptsByDateRange(expertId, dataRangeStart, dataRangeEnd);
+  };
+
+  if (expertDataLoading) return <Typography>Loading...</Typography>;
+
+  if (expertDataError) return <Typography>{expertDataError}</Typography>;
 
   if (expert)
     return (
@@ -77,7 +80,15 @@ const ExpertProfilePage = () => {
             <Typography mt={1}>{expert.bio}</Typography>
           </Grid>
         </Grid>
-        <Schedule />
+        {/* Schedule */}
+        <ProfileExpertSchedule
+          appointments={appointments}
+          dataRangeStart={dataRangeStart}
+          dataRangeEnd={dataRangeEnd}
+          handleChangeRangeStart={handleChangeRangeStart}
+          handleChangeRangeEnd={handleChangeRangeEnd}
+          handleSearch={handleSearch}
+        />
       </Container>
     );
 };

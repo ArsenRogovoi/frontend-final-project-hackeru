@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { getToken } from "../utils/localStorageService";
+import dayjs from "dayjs";
 
 const useAppointmentApi = () => {
   const [loading, setLoading] = useState(false);
@@ -42,6 +43,7 @@ const useAppointmentApi = () => {
     }
   };
 
+  // change to by date range for experts:
   const getMonthAppointments = async (id, month, year) => {
     try {
       setError(null);
@@ -82,6 +84,25 @@ const useAppointmentApi = () => {
     }
   };
 
+  // for regular users
+  const getFreeApptsByDateRange = async (id, from, to) => {
+    try {
+      setError(null);
+      setLoading(true);
+      const fromDate = dayjs(from).format("YYYY-MM-DD");
+      const toDate = dayjs(to).format("YYYY-MM-DD");
+      const response = await axios({
+        method: "get",
+        url: `${BASE_URL}/appointments/free-appts/${id}/${fromDate}/${toDate}`,
+      });
+      setAppointments(response.data);
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     loading,
     error,
@@ -90,6 +111,7 @@ const useAppointmentApi = () => {
     createAppointment,
     getMonthAppointments,
     deleteAppointment,
+    getFreeApptsByDateRange,
   };
 };
 

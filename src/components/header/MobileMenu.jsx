@@ -103,9 +103,9 @@ const MobileMenu = () => {
             <ListItem>
               <ListItemButton
                 component={Link}
-                to={ROUTES.EXPERTS.path}
+                to={ROUTES.EXPERTS_SEARCH.path}
                 sx={{
-                  backgroundColor: isSelected(ROUTES.EXPERTS.path)
+                  backgroundColor: isSelected(ROUTES.EXPERTS_SEARCH.path)
                     ? "rgba(255, 255, 255, 0.2)"
                     : "transparent",
                   "&:hover": {
@@ -113,7 +113,7 @@ const MobileMenu = () => {
                   },
                 }}
               >
-                <ListItemText primary={ROUTES.EXPERTS.name} color="" />
+                <ListItemText primary={ROUTES.EXPERTS_SEARCH.name} color="" />
               </ListItemButton>
             </ListItem>
           </List>

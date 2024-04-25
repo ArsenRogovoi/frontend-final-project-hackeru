@@ -18,7 +18,7 @@ const Router = createBrowserRouter(
       {/* All users: */}
       <Route index element={<EntryPage />} />
       <Route path="*" element={<>error page</>} />
-      <Route path={ROUTES.EXPERTS.path} element={<ExpertSearchPage />} />
+      <Route path={ROUTES.EXPERTS_SEARCH.path} element={<ExpertSearchPage />} />
       <Route
         path={ROUTES.EXPERT_PROFILE.path}
         element={<ExpertProfilePage />}

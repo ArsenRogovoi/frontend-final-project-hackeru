@@ -19,11 +19,11 @@ const DesktopNavBar = () => {
         return currentPath;
       case ROUTES.ABOUT.path:
         return currentPath;
-      case ROUTES.EXPERTS.path:
+      case ROUTES.EXPERTS_SEARCH.path:
         return currentPath;
       default:
         if (currentPath.includes("/experts/")) {
-          return ROUTES.EXPERTS.path;
+          return ROUTES.EXPERTS_SEARCH.path;
         } else {
           return false;
         }
@@ -68,10 +68,10 @@ const DesktopNavBar = () => {
           value={ROUTES.ABOUT.path}
         />
         <Tab
-          label={ROUTES.EXPERTS.name}
+          label={ROUTES.EXPERTS_SEARCH.name}
           component={Link}
-          to={ROUTES.EXPERTS.path}
-          value={ROUTES.EXPERTS.path}
+          to={ROUTES.EXPERTS_SEARCH.path}
+          value={ROUTES.EXPERTS_SEARCH.path}
         />
         <Tab value={"#"} sx={{ display: "none" }} />
       </Tabs>

@@ -6,7 +6,7 @@ const ROUTES = {
   LOGIN: { path: "/authorization/login", name: "Log in" },
   SIGNUP: { path: "/authorization/signup", name: "Sign up" },
   EXPERT_SIGNUP: { path: "/authorization/expert", name: "Expert sign up" },
-  EXPERTS: { path: "/experts", name: "Find experts" },
+  EXPERTS_SEARCH: { path: "/experts", name: "Find experts" },
   EXPERT_PROFILE: { path: "/experts/:expertId", name: "Expert profile" },
   // Authorized users:
   PROFILE: { path: "/profile", name: "Profile" },

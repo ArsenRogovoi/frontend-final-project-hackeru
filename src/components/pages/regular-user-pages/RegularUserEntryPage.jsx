@@ -1,18 +1,18 @@
-import { Container, Grid, Typography } from "@mui/material";
-import DashboardCard from "../../dashboard/DashboardCard";
 import Dashboard from "../../dashboard/Dashboard";
-import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-import CheckIcon from "@mui/icons-material/Check";
-import BlockIcon from "@mui/icons-material/Block";
-import EditIcon from "@mui/icons-material/Edit";
+import { Container, Typography } from "@mui/material";
+import DashboardCard from "../../dashboard/DashboardCard";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../models/routeModel";
+import SearchIcon from "@mui/icons-material/Search";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import EditIcon from "@mui/icons-material/Edit";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const ExpertUserEntryPage = () => {
+const RegularUserEntryPage = () => {
   const navigate = useNavigate();
 
-  const handleScheduleClick = () => {
-    navigate(ROUTES.EXPERT_SCHEDULE.path);
+  const handleSearchForExpertsClick = () => {
+    navigate(ROUTES.EXPERTS_SEARCH.path);
   };
 
   return (
@@ -22,12 +22,26 @@ const ExpertUserEntryPage = () => {
       </Typography>
       <Dashboard>
         <DashboardCard
-          MuiIcon={AutoStoriesIcon}
-          title={"Schedule"}
+          MuiIcon={SearchIcon}
+          title={"Search for experts"}
           text={
             "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
           }
-          handleClick={handleScheduleClick}
+          handleClick={handleSearchForExpertsClick}
+        />
+        <DashboardCard
+          MuiIcon={AutoStoriesIcon}
+          title={"My appointments"}
+          text={
+            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
+          }
+        />
+        <DashboardCard
+          MuiIcon={FavoriteIcon}
+          title={"Favorite experts"}
+          text={
+            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
+          }
         />
         <DashboardCard
           MuiIcon={EditIcon}
@@ -36,27 +50,8 @@ const ExpertUserEntryPage = () => {
             "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
           }
         />
-        <Grid item xs={12}>
-          <Typography textAlign={"left"} variant="h6" sx={{ ml: 2 }}>
-            In developing:
-          </Typography>
-        </Grid>
-        <DashboardCard
-          MuiIcon={CheckIcon}
-          title={"Confirmations"}
-          text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
-          }
-        />
-        <DashboardCard
-          MuiIcon={BlockIcon}
-          title={"Black List"}
-          text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
-          }
-        />
       </Dashboard>
     </Container>
   );
 };
-export default ExpertUserEntryPage;
+export default RegularUserEntryPage;
