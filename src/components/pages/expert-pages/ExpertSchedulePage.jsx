@@ -27,7 +27,7 @@ const ExpertSchedulePage = () => {
     }
   }, []);
 
-  const [date, setDate] = useState(dayjs());
+  const [date, setDate] = useState(dayjs().startOf("day"));
   const [weekDates, setWeekDates] = useState([]);
 
   const handleDateChange = (newDate) => {
@@ -60,6 +60,10 @@ const ExpertSchedulePage = () => {
     deleteAppointment(_id);
   };
 
+  const handleGetMonthAppts = (date) => {
+    getMonthAppointments(user._id, date.month(), date.year());
+  };
+
   useEffect(() => {
     updateWeekDates(date);
     getMonthAppointments(user._id, date.month(), date.year());
@@ -77,10 +81,12 @@ const ExpertSchedulePage = () => {
           date={date}
           appointments={appointments}
           weekDates={weekDates}
+          error={error}
           loading={loading}
           handleCreateAppointment={handleCreateAppointment}
           handleDeleteAppointment={handleDeleteAppointment}
           handleDateChange={handleDateChange}
+          getMonthAppointments={handleGetMonthAppts}
         />
       </Box>
     );

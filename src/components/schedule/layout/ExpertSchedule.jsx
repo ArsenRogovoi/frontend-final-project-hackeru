@@ -5,13 +5,12 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { DateCalendar } from "@mui/x-date-pickers";
-
 import { useState } from "react";
 import dayjs from "dayjs";
 import DeleteConfirmationModal from "../forms/DeleteConfirmationModal";
 import CreateAppointmentModal from "../forms/CreateAppointmentModal";
 import WeekSlots from "../components/WeekSlots";
+import ScheduleCalendar from "../components/SchedulCalendar";
 
 const ExpertSchedule = ({
   user,
@@ -20,8 +19,10 @@ const ExpertSchedule = ({
   weekDates,
   handleCreateAppointment,
   appointments,
+  error,
   loading,
   handleDeleteAppointment,
+  getMonthAppointments,
 }) => {
   // responsiveness:
   const theme = useTheme();
@@ -38,9 +39,15 @@ const ExpertSchedule = ({
   const [delModalApp, setDelModalApp] = useState(null);
 
   const handleModalOpen = (day) => {
+    const currentTime = dayjs();
+    const startTime = day
+      .hour(currentTime.hour())
+      .minute(currentTime.minute())
+      .second(0)
+      .millisecond(0);
     setModalDay(day);
-    setModalStartTime(day);
-    setModalEndTime(day.add(1, "hour"));
+    setModalStartTime(startTime);
+    setModalEndTime(startTime.add(1, "hour"));
     setModalIsOpen(true);
   };
   const handleModalClose = () => {
@@ -62,7 +69,6 @@ const ExpertSchedule = ({
 
   const handleModalCreateBtnClick = () => {
     handleCreateAppointment(modalStartTime, modalEndTime);
-    handleModalClose();
   };
 
   const modalStyle = {
@@ -86,11 +92,12 @@ const ExpertSchedule = ({
       >
         {/* calendar */}
         <Grid item>
-          <DateCalendar
-            value={date}
-            onChange={handleDateChange}
-            disablePast
+          <ScheduleCalendar
+            date={date}
+            getMonthAppointments={getMonthAppointments}
+            handleDateChange={handleDateChange}
             loading={loading}
+            appointments={appointments}
           />
         </Grid>
         <Grid item>
@@ -112,6 +119,8 @@ const ExpertSchedule = ({
         </Grid>
       </Grid>
       <CreateAppointmentModal
+        loading={loading}
+        error={error}
         modalIsOpen={modalIsOpen}
         modalStyle={modalStyle}
         modalDay={modalDay}

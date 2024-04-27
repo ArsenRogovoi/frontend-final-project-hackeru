@@ -1,5 +1,15 @@
-import { Box, Button, Divider, Grid, Modal, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Modal,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { TimePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+import { useState } from "react";
 
 const CreateAppointmentModal = ({
   modalIsOpen,
@@ -11,11 +21,18 @@ const CreateAppointmentModal = ({
   handleChangeModalEndTime,
   handleModalClose,
   handleConfirm,
+  loading,
+  error,
 }) => {
+  const [triedToCreate, setTriedToCreate] = useState(false);
+
   return (
     <Modal
       open={modalIsOpen}
-      onClose={handleModalClose}
+      onClose={() => {
+        setTriedToCreate(false);
+        handleModalClose();
+      }}
       slotProps={{
         backdrop: {
           style: {
@@ -52,16 +69,50 @@ const CreateAppointmentModal = ({
                 onChange={handleChangeModalEndTime}
               />
             </Grid>
+            {triedToCreate && !loading && error && (
+              <Grid item xs={12} mt={1}>
+                <Paper
+                  sx={{
+                    maxWidth: "300px",
+                    backgroundColor: "#FF7373",
+                  }}
+                >
+                  <Typography mx={1}>{error}</Typography>
+                </Paper>
+              </Grid>
+            )}
+            {triedToCreate && !loading && !error && (
+              <Grid item xs={12} mt={1}>
+                <Paper
+                  sx={{
+                    maxWidth: "300px",
+                    backgroundColor: "#A9F16C",
+                  }}
+                >
+                  <Typography mx={1}>The appointment slot created</Typography>
+                </Paper>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <Box mt={2} display={"flex"}>
-                <Button variant="contained" onClick={handleConfirm}>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setTriedToCreate(true);
+                    handleConfirm();
+                  }}
+                  disabled={triedToCreate && !loading && !error}
+                >
                   Confirm
                 </Button>
                 <Button
                   variant="contained"
                   color="warning"
                   sx={{ ml: 2 }}
-                  onClick={handleModalClose}
+                  onClick={() => {
+                    setTriedToCreate(false);
+                    handleModalClose();
+                  }}
                 >
                   Close
                 </Button>
