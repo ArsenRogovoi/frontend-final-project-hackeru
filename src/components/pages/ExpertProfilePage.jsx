@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Grid, Typography } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import ProfileExpertSchedule from "../schedule/externalSchedule/ProfileExpertSchedule";
 import useUsersApi from "../../hooks/useUsersApi";
 import dayjs from "dayjs";
 import useAppointmentApi from "../../hooks/useAppointmentApi";
+import ProfileExpertSchedule from "../externalSchedule/ProfileExpertSchedule";
 
 const ExpertProfilePage = () => {
   let { expertId } = useParams();
@@ -37,6 +37,10 @@ const ExpertProfilePage = () => {
   };
 
   const handleSearch = () => {
+    getFreeApptsByDateRange(expertId, dataRangeStart, dataRangeEnd);
+  };
+
+  const refreshAppts = () => {
     getFreeApptsByDateRange(expertId, dataRangeStart, dataRangeEnd);
   };
 
@@ -88,6 +92,9 @@ const ExpertProfilePage = () => {
           handleChangeRangeStart={handleChangeRangeStart}
           handleChangeRangeEnd={handleChangeRangeEnd}
           handleSearch={handleSearch}
+          apptsDataLoading={apptsDataLoading}
+          apptsDataError={apptsDataError}
+          refreshAppts={refreshAppts}
         />
       </Container>
     );

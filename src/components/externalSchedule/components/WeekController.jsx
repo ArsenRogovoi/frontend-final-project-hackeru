@@ -1,6 +1,6 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import Button from "../../../common/Button";
+import Button from "../../common/Button";
 
 const WeekController = ({
   dataRangeStart,

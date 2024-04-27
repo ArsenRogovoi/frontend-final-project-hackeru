@@ -103,6 +103,28 @@ const useAppointmentApi = () => {
     }
   };
 
+  const bookAppointment = async (apptId) => {
+    try {
+      setError(null);
+      setLoading(true);
+      const token = getToken();
+      const response = await axios({
+        method: "put",
+        url: `${BASE_URL}/appointments/${apptId}`,
+        headers: { "x-auth-token": token },
+      });
+      if (!response.data) {
+        setAppointment(null);
+        throw new Error("Failed to book appointment");
+      }
+      setAppointment(response.data);
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     loading,
     error,
@@ -112,6 +134,7 @@ const useAppointmentApi = () => {
     getMonthAppointments,
     deleteAppointment,
     getFreeApptsByDateRange,
+    bookAppointment,
   };
 };
 
