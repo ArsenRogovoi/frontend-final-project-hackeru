@@ -2,11 +2,15 @@ import { IconButton, Menu, MenuItem, Avatar as MuiAvatar } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import { useState } from "react";
 import { useUser } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../models/routeModel";
 
 const Avatar = ({ sx, user }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { logoutUser } = useUser();
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -17,6 +21,7 @@ const Avatar = ({ sx, user }) => {
   const handleLogout = () => {
     logoutUser();
     handleClose();
+    navigate(ROUTES.LOGIN.path);
   };
 
   const {

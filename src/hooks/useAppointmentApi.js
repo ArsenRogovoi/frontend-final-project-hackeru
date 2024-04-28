@@ -12,6 +12,8 @@ const useAppointmentApi = () => {
   const BASE_URL = "http://localhost:3500";
 
   const handleError = (error) => {
+    console.log("in handleError:");
+    console.log(error);
     if (error.response) {
       // Server error
       setError(error.response.data);
@@ -125,6 +127,45 @@ const useAppointmentApi = () => {
     }
   };
 
+  const getMyBookedAppts = async () => {
+    try {
+      setError(null);
+      setLoading(true);
+      const token = getToken();
+      const response = await axios({
+        method: "get",
+        url: `${BASE_URL}/appointments/my-appts`,
+        headers: { "x-auth-token": token },
+      });
+      setAppointments(response.data);
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const userCancelAppt = async (apptId) => {
+    try {
+      setError(null);
+      setLoading(true);
+      const token = getToken();
+      const canceledAppt = await axios({
+        method: "put",
+        url: `${BASE_URL}/appointments/cancel-appt/${apptId}`,
+        headers: { "x-auth-token": token },
+      });
+      setAppointment(canceledAppt);
+      setAppointments((prevAppointments) =>
+        prevAppointments.filter((appt) => appt._id !== apptId)
+      );
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     loading,
     error,
@@ -135,6 +176,8 @@ const useAppointmentApi = () => {
     deleteAppointment,
     getFreeApptsByDateRange,
     bookAppointment,
+    getMyBookedAppts,
+    userCancelAppt,
   };
 };
 

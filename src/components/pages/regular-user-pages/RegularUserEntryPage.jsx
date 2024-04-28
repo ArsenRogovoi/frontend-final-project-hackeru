@@ -14,6 +14,9 @@ const RegularUserEntryPage = () => {
   const handleSearchForExpertsClick = () => {
     navigate(ROUTES.EXPERTS_SEARCH.path);
   };
+  const handleMyAppointmentsClick = () => {
+    navigate(ROUTES.MY_APPTS.path);
+  };
 
   return (
     <Container>
@@ -35,6 +38,7 @@ const RegularUserEntryPage = () => {
           text={
             "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
           }
+          handleClick={handleMyAppointmentsClick}
         />
         <DashboardCard
           MuiIcon={FavoriteIcon}

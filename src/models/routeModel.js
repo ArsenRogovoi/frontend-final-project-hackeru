@@ -10,8 +10,9 @@ const ROUTES = {
   EXPERT_PROFILE: { path: "/experts/:expertId", name: "Expert profile" },
   // Authorized users:
   PROFILE: { path: "/profile", name: "Profile" },
-  //Regular users: (regular/)
-  FAV_EXPERTS: { path: "/regular/fav-experts", name: "Favorite experts" },
+  //Regular users:
+  FAV_EXPERTS: { path: "/fav-experts", name: "Favorite experts" },
+  MY_APPTS: { path: "/my-appts", name: "My appointments" },
   // Expert users: (expert/)
   EXPERT_SCHEDULE: { path: "/expert/schedule", name: "Schedule" },
   // Admin users: (admin/)

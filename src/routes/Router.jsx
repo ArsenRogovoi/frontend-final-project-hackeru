@@ -11,6 +11,7 @@ import ExpertProfilePage from "../components/pages/ExpertProfilePage";
 import AuthPage from "../components/pages/AuthPage";
 import Sandbox from "../sandbox/Sandbox";
 import ExpertSchedulePage from "../components/pages/expert-pages/ExpertSchedulePage";
+import MyApptsPage from "../components/pages/regular-user-pages/MyApptsPage";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +37,7 @@ const Router = createBrowserRouter(
       />
       {/* Regular users: */}
       <Route path={ROUTES.FAV_EXPERTS.path} element={<>favorite experts</>} />
+      <Route path={ROUTES.MY_APPTS.path} element={<MyApptsPage />} />
       {/* Admin users: */}
     </Route>
   )
