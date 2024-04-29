@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Grid, Typography } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import useUsersApi from "../../hooks/useUsersApi";
+import useUsersApi from "../../../hooks/useUsersApi";
 import dayjs from "dayjs";
-import useAppointmentApi from "../../hooks/useAppointmentApi";
-import ProfileExpertSchedule from "../externalSchedule/ProfileExpertSchedule";
+import useAppointmentApi from "../../../hooks/useAppointmentApi";
+import ProfileExpertSchedule from "../../externalSchedule/ProfileExpertSchedule";
 
 const ExpertProfilePage = () => {
   let { expertId } = useParams();

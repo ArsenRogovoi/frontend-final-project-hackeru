@@ -4,14 +4,14 @@ import {
   Route,
 } from "react-router-dom";
 import ROUTES from "../models/routeModel";
-import EntryPage from "../components/pages/EntryPage";
 import GlobalLayout from "../components/layouts/GlobalLayout";
-import ExpertSearchPage from "../components/pages/ExpertSearchPage";
-import ExpertProfilePage from "../components/pages/ExpertProfilePage";
-import AuthPage from "../components/pages/AuthPage";
 import Sandbox from "../sandbox/Sandbox";
 import ExpertSchedulePage from "../components/pages/expert-pages/ExpertSchedulePage";
 import MyApptsPage from "../components/pages/regular-user-pages/MyApptsPage";
+import AuthPage from "../components/pages/common-pages/AuthPage";
+import EntryPage from "../components/pages/common-pages/EntryPage";
+import ExpertProfilePage from "../components/pages/common-pages/ExpertProfilePage";
+import ExpertSearchPage from "../components/pages/common-pages/ExpertSearchPage";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(

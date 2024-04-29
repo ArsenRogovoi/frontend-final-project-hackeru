@@ -1,9 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import { Grid, Tabs, Tab, Container, Paper, Box, Divider } from "@mui/material";
-import ROUTES from "../../models/routeModel";
-import SignupForm from "../forms/SignupForm";
-import LoginForm from "../forms/LoginForm";
-import ExpertSignupForm from "../forms/ExpertSignupForm";
+import ROUTES from "../../../models/routeModel";
+import SignupForm from "../../forms/SignupForm";
+import LoginForm from "../../forms/LoginForm";
+import ExpertSignupForm from "../../forms/ExpertSignupForm";
 
 const AuthPage = () => {
   const { type } = useParams();
