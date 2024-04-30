@@ -35,33 +35,27 @@ const RegularUserEntryPage = () => {
         <DashboardCard
           MuiIcon={SearchIcon}
           title={"Search for experts"}
-          text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
-          }
+          text={"Click here to start searching your expert"}
           handleClick={handleSearchForExpertsClick}
         />
         <DashboardCard
           MuiIcon={AutoStoriesIcon}
           title={"My appointments"}
           text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
+            "Here you can find appointments you booked. You also can cancel appointment."
           }
           handleClick={handleMyAppointmentsClick}
         />
         <DashboardCard
           MuiIcon={FavoriteIcon}
           title={"Favorite experts"}
-          text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
-          }
+          text={"Here are your favorite appointments saved in one place."}
           handleClick={handleFavoriteExpertsClick}
         />
         <DashboardCard
           MuiIcon={EditIcon}
           title={"Edit Profile"}
-          text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
-          }
+          text={"If you want change something in your profile, click here."}
           handleClick={handleEditProfileClick}
         />
       </Dashboard>

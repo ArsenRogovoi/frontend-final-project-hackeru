@@ -17,6 +17,9 @@ const EditExpertForm = ({ user, loading, error, updateUser }) => {
     const updatedUser = await updateUser(updExpert);
     if (updatedUser) {
       setUpdated(true);
+      setTimeout(() => {
+        setUpdated(false);
+      }, 1500);
     }
   };
 

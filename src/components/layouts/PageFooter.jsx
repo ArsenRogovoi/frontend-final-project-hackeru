@@ -1,41 +1,36 @@
 import * as React from "react";
-import { Grid, Link, Typography, Container } from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
 
 const PageFooter = () => {
   return (
-    <Grid
-      container
-      direction={"column"}
-      alignItems={"center"}
-      bgcolor={"#303030"}
-      color={"white"}
-    >
-      <Container sx={{ bgcolor: "#303030", color: "white" }}>
-        <Grid container mt={1}>
-          <Grid item xs={6}>
-            <Grid container direction={"column"} alignItems={"start"}>
-              <Grid item ml={1}>
-                <Link href="/about" color={"#a6d3ff"}>
-                  About
-                </Link>
-              </Grid>
-              <Grid item ml={1}>
-                <Link href="#" color={"#a6d3ff"}>
-                  Contacts
-                </Link>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={6} textAlign={"center"} border={1}>
-            LOGO
-          </Grid>
-        </Grid>
-        <Grid item mt={2}>
-          <Typography color={"#a6d3ff"} align="center">
-            ©New Visit
+    <Grid container bgcolor={"#303030"} color={"white"} pt={1}>
+      <Grid item xs={6}>
+        <Box
+          sx={{ height: "100%" }}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          p={1}
+        >
+          <Typography>
+            Developed by
+            <br />
+            Arsen Rogovoi
           </Typography>
-        </Grid>
-      </Container>
+        </Box>
+      </Grid>
+      <Grid item xs={6}>
+        <Box display={"flex"} justifyContent={"center"} alignContent={"center"}>
+          <img
+            alt="logo"
+            src="/assets/images/tab-icon.png"
+            style={{ maxWidth: "80px" }}
+          />
+        </Box>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography align="center">©New Visit</Typography>
+      </Grid>
     </Grid>
   );
 };

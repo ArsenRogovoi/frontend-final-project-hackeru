@@ -28,16 +28,14 @@ const ExpertUserEntryPage = () => {
           MuiIcon={AutoStoriesIcon}
           title={"Schedule"}
           text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
+            "Click here to create your appointment slots and see how many appointments booked alredy."
           }
           handleClick={handleScheduleClick}
         />
         <DashboardCard
           MuiIcon={EditIcon}
           title={"Edit Profile"}
-          text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
-          }
+          text={"Here you can edit your profile."}
           handleClick={handleEditProfileClick}
         />
         <Grid item xs={12}>
@@ -49,14 +47,14 @@ const ExpertUserEntryPage = () => {
           MuiIcon={CheckIcon}
           title={"Confirmations"}
           text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
+            "In future we want to add confirmation functionality. Here you will be able to choose if to let book appointment for user."
           }
         />
         <DashboardCard
           MuiIcon={BlockIcon}
           title={"Black List"}
           text={
-            "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
+            "Soon you can choose unwanted users for booking your appointment slots"
           }
         />
       </Dashboard>

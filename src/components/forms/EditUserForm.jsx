@@ -17,6 +17,9 @@ const EditUserForm = ({ user, loading, error, updateUser }) => {
     const updatedUser = await updateUser(updUser);
     if (updatedUser) {
       setUpdated(true);
+      setTimeout(() => {
+        setUpdated(false);
+      }, 1500);
     }
   };
 
