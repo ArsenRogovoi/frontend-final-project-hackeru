@@ -14,6 +14,9 @@ const ExpertUserEntryPage = () => {
   const handleScheduleClick = () => {
     navigate(ROUTES.EXPERT_SCHEDULE.path);
   };
+  const handleEditProfileClick = () => {
+    navigate(ROUTES.EDIT_EXPERT.path);
+  };
 
   return (
     <Container>
@@ -35,6 +38,7 @@ const ExpertUserEntryPage = () => {
           text={
             "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
           }
+          handleClick={handleEditProfileClick}
         />
         <Grid item xs={12}>
           <Typography textAlign={"left"} variant="h6" sx={{ ml: 2 }}>

@@ -13,8 +13,10 @@ const ROUTES = {
   //Regular users:
   FAV_EXPERTS: { path: "/fav-experts", name: "Favorite experts" },
   MY_APPTS: { path: "/my-appts", name: "My appointments" },
+  EDIT_USER: { path: "/edit-user", name: "Edit profile" },
   // Expert users: (expert/)
   EXPERT_SCHEDULE: { path: "/expert/schedule", name: "Schedule" },
+  EDIT_EXPERT: { path: "/experts/edit-profile", name: "Edit profile" },
   // Admin users: (admin/)
 };
 

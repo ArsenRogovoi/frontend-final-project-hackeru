@@ -22,6 +22,10 @@ const RegularUserEntryPage = () => {
     navigate(ROUTES.FAV_EXPERTS.path);
   };
 
+  const handleEditProfileClick = () => {
+    navigate(ROUTES.EDIT_USER.path);
+  };
+
   return (
     <Container>
       <Typography textAlign={"center"} variant="h4" mt={1}>
@@ -58,6 +62,7 @@ const RegularUserEntryPage = () => {
           text={
             "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
           }
+          handleClick={handleEditProfileClick}
         />
       </Dashboard>
     </Container>

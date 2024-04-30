@@ -11,18 +11,22 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [responsed, setResponsed] = useState(false);
   const [signupLoading, setSignupLoading] = useState(false);
   const [signupError, setSignupError] = useState(null);
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState(null);
   const [getUserDataLoading, setGetUserDataLoading] = useState(false);
   const [getUserDataError, setGetUserDataError] = useState(null);
+  const [updateUserDataLoading, setUpdateUserDataLoading] = useState(false);
+  const [updateUserDataError, setUpdateUserDataError] = useState(null);
+
+  const BASE_URL = "http://localhost:3500";
 
   const ERROR_TYPE = {
     SIGNUP: "signup",
     LOGIN: "login",
     GET_USER_DATA: "getUserData",
+    UPDATE_USER: "updateUser",
   };
 
   const handleError = (error, type) => {
@@ -65,6 +69,19 @@ export const UserProvider = ({ children }) => {
         }
         break;
 
+      case ERROR_TYPE.UPDATE_USER:
+        if (error.response) {
+          // Server error
+          setUpdateUserDataError(error.response.data);
+        } else if (error.request) {
+          // Network error
+          setUpdateUserDataError("Network Error");
+        } else {
+          // Other error
+          setUpdateUserDataError(error.message);
+        }
+        break;
+
       default:
         break;
     }
@@ -72,13 +89,12 @@ export const UserProvider = ({ children }) => {
 
   // create user in DB
   const signupUser = async (formData) => {
-    setResponsed(false);
     setSignupLoading(true);
     setSignupError(null);
     try {
       const response = await axios({
         method: "post",
-        url: "http://localhost:3500/users",
+        url: `${BASE_URL}/users`,
         data: formData,
       });
       return response.data;
@@ -86,19 +102,17 @@ export const UserProvider = ({ children }) => {
       handleError(error, ERROR_TYPE.SIGNUP);
     } finally {
       setSignupLoading(true);
-      setResponsed(true);
     }
   };
 
   // requests token from server
   const loginUser = async (formData) => {
-    setResponsed(false);
     setLoginLoading(true);
     setLoginError(null);
     try {
       const response = await axios({
         method: "post",
-        url: "http://localhost:3500/users/login",
+        url: `${BASE_URL}/users/login`,
         data: formData,
       });
       setToken(response.data);
@@ -107,7 +121,6 @@ export const UserProvider = ({ children }) => {
       handleError(error, ERROR_TYPE.LOGIN);
     } finally {
       setLoginLoading(false);
-      setResponsed(true);
     }
   };
 
@@ -118,7 +131,6 @@ export const UserProvider = ({ children }) => {
 
   // requests user data
   const getUserData = async () => {
-    setResponsed(false);
     setGetUserDataLoading(true);
     setGetUserDataError(null);
     try {
@@ -127,7 +139,7 @@ export const UserProvider = ({ children }) => {
       const user = decodeToken(token);
       const response = await axios({
         method: "get",
-        url: `http://localhost:3500/users/userInfo/${user._id}`,
+        url: `${BASE_URL}/users/userInfo/${user._id}`,
         headers: { "x-auth-token": token },
       });
       setUser(response.data);
@@ -135,7 +147,26 @@ export const UserProvider = ({ children }) => {
       handleError(error, ERROR_TYPE.GET_USER_DATA);
     } finally {
       setGetUserDataLoading(false);
-      setResponsed(true);
+    }
+  };
+
+  const updateUser = async (updObj) => {
+    try {
+      setUpdateUserDataError(null);
+      setUpdateUserDataLoading(true);
+      const token = getToken();
+      const response = await axios({
+        method: "put",
+        url: `${BASE_URL}/users`,
+        headers: { "x-auth-token": token },
+        data: updObj,
+      });
+      setUser(response.data);
+      return response.data;
+    } catch (error) {
+      handleError(error, ERROR_TYPE.UPDATE_USER);
+    } finally {
+      setUpdateUserDataLoading(false);
     }
   };
 
@@ -143,17 +174,19 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
-        responsed,
         signupLoading,
         signupError,
         loginLoading,
         loginError,
         getUserDataLoading,
         getUserDataError,
+        updateUserDataLoading,
+        updateUserDataError,
         loginUser,
         logoutUser,
         signupUser,
         getUserData,
+        updateUser,
       }}
     >
       {children}
