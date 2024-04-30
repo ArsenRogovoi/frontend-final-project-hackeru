@@ -20,13 +20,16 @@ const ExpertSearchPage = () => {
     getExperts,
     getUser,
     filterExpertsByString,
+    likeExpert,
   } = useUsersApi();
   const { user: userFromCntxt } = useUser();
   const [searchVal, setSearchVal] = useState("");
 
   useEffect(() => {
     getExperts();
-    getUser(userFromCntxt._id);
+    if (userFromCntxt) {
+      getUser(userFromCntxt._id);
+    }
   }, []);
 
   const handleSearch = () => {
@@ -73,7 +76,11 @@ const ExpertSearchPage = () => {
       </Grid>
       {/* experts cards: */}
       {filteredExperts ? (
-        <ExpertsCards experts={filteredExperts} user={user} />
+        <ExpertsCards
+          experts={filteredExperts}
+          user={user}
+          likeExpert={likeExpert}
+        />
       ) : (
         <CircularProgress />
       )}

@@ -12,6 +12,7 @@ import AuthPage from "../components/pages/common-pages/AuthPage";
 import EntryPage from "../components/pages/common-pages/EntryPage";
 import ExpertProfilePage from "../components/pages/common-pages/ExpertProfilePage";
 import ExpertSearchPage from "../components/pages/common-pages/ExpertSearchPage";
+import FavoriteExpertsPage from "../components/pages/regular-user-pages/FavoriteExpertsPage";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,7 +37,7 @@ const Router = createBrowserRouter(
         element={<ExpertSchedulePage />}
       />
       {/* Regular users: */}
-      <Route path={ROUTES.FAV_EXPERTS.path} element={<>favorite experts</>} />
+      <Route path={ROUTES.FAV_EXPERTS.path} element={<FavoriteExpertsPage />} />
       <Route path={ROUTES.MY_APPTS.path} element={<MyApptsPage />} />
       {/* Admin users: */}
     </Route>

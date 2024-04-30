@@ -97,7 +97,23 @@ const useUsersApi = () => {
     }
   };
 
-  const likeExpert = async (expertId) => {};
+  const likeExpert = async (expertId) => {
+    try {
+      setError(null);
+      setLoading(true);
+      const token = getToken();
+      const response = await axios({
+        method: "put",
+        url: `${BASE_URL}/users/like-expert/${expertId}`,
+        headers: { "x-auth-token": token },
+      });
+      if (response.data) setUser(response.data);
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return {
     loading,
@@ -111,6 +127,7 @@ const useUsersApi = () => {
     getExpertData,
     getExperts,
     filterExpertsByString,
+    likeExpert,
   };
 };
 export default useUsersApi;
