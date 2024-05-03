@@ -39,7 +39,7 @@ git clone https://github.com/ArsenRogovoi/frontend-final-project-hackeru.git
 after downloading this repo open it in console and download all the dependencies:
 
 ```bash
-npm run i
+npm i
 ```
 
 ### Server:
