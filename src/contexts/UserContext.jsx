@@ -101,7 +101,7 @@ export const UserProvider = ({ children }) => {
     } catch (error) {
       handleError(error, ERROR_TYPE.SIGNUP);
     } finally {
-      setSignupLoading(true);
+      setSignupLoading(false);
     }
   };
 

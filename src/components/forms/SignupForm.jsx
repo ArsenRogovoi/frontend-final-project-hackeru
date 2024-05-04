@@ -11,7 +11,7 @@ import ROUTES from "../../models/routeModel";
 
 const SignupForm = () => {
   const navigate = useNavigate();
-  const { signupUser, error, loading } = useUser();
+  const { signupUser, signupError, signupLoading } = useUser();
 
   const handleSubmit = async (formData) => {
     const normalized = normalizeRegularSignup(formData);
@@ -25,7 +25,7 @@ const SignupForm = () => {
     handleSubmit
   );
 
-  if (!loading)
+  if (!signupLoading)
     return (
       <Form
         title="Signup page"
@@ -65,17 +65,17 @@ const SignupForm = () => {
           onChange={rest.handleChange}
           data={value.data}
         />
-        {error && (
+        {signupError && (
           <Grid item>
             <Typography color={"red"} fontWeight={600}>
-              {error}
+              {signupError}
             </Typography>
           </Grid>
         )}
       </Form>
     );
 
-  if (loading) return <Typography>Loading...</Typography>;
+  if (signupLoading) return <Typography>Loading...</Typography>;
 };
 
 export default SignupForm;

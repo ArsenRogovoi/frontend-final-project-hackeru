@@ -41,7 +41,7 @@ const expertSignupSchema = {
   country: Joi.string().required(),
   city: Joi.string().required(),
   street: Joi.string().required(),
-  houseNum: Joi.string().required(),
+  houseNum: Joi.number().required(),
 };
 
 export default expertSignupSchema;

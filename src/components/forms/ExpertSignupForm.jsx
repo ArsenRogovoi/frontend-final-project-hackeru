@@ -11,7 +11,7 @@ import Form from "./components/Form";
 
 const ExpertSignupForm = () => {
   const navigate = useNavigate();
-  const { signupUser, error, loading } = useUser();
+  const { signupUser, signupError, signupLoading } = useUser();
 
   const handleSubmit = async (formData) => {
     const normalized = normalizeExpertSignup(formData);
@@ -25,7 +25,7 @@ const ExpertSignupForm = () => {
     handleSubmit
   );
 
-  if (!loading) {
+  if (!signupLoading) {
     return (
       <Form
         title="Signup page"
@@ -128,10 +128,10 @@ const ExpertSignupForm = () => {
           onChange={rest.handleChange}
           data={value.data}
         />
-        {error && (
+        {signupError && (
           <Grid item>
             <Typography color={"red"} fontWeight={600}>
-              {error}
+              {signupError}
             </Typography>
           </Grid>
         )}
