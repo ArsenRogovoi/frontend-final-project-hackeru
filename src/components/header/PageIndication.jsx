@@ -13,12 +13,7 @@ const PageIndication = () => {
   });
 
   return (
-    <Typography
-      variant="h6"
-      component="div"
-      // sx={{ flexGrow: 1 }}
-      sx={{ display: { md: "none" } }}
-    >
+    <Typography variant="h6" component="div" sx={{ display: { md: "none" } }}>
       {currentRoute}
     </Typography>
   );

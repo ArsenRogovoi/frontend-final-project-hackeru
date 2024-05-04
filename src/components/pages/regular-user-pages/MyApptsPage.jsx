@@ -44,7 +44,6 @@ const MyApptsPage = () => {
       getMyBookedAppts();
     } catch (error) {
     } finally {
-      //   console.log(appointments);
     }
   }, []);
 

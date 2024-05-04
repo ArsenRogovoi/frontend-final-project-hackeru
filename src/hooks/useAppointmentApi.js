@@ -12,8 +12,6 @@ const useAppointmentApi = () => {
   const BASE_URL = "http://localhost:3500";
 
   const handleError = (error) => {
-    console.log("in handleError:");
-    console.log(error);
     if (error.response) {
       // Server error
       setError(error.response.data);
